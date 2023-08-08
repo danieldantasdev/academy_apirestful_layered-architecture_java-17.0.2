@@ -1,9 +1,6 @@
 package br.com.senac.academy.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -11,8 +8,12 @@ import lombok.Data;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer _id;
+    @Column(name = "name")
     private String _name;
+    @Column(name = "surname")
     private String _surName;
+    @Column(name = "email")
     private String _email;
 }
