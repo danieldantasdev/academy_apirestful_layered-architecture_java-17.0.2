@@ -1,0 +1,41 @@
+### POST request students
+POST {{host}}/students
+Content-Type: application/json
+
+{
+  "name": "Daniel",
+  "surname": "Dantas",
+  "email": "contatodanieldantasdev@gmail.com"
+}
+
+### GET request students
+GET {{host}}/students
+Accept: application/json
+
+### GET request student by id
+GET {{host}}/students/1
+Accept: application/json
+
+### PUT request student
+PUT {{host}}/students/3
+Content-Type: application/json
+
+{
+  "name": "Daniel4",
+  "surname": "Dantas",
+  "email": "contatodanieldantasdev@gmail.com"
+}
+
+### PATCH request student
+PATCH {{host}}/students/3
+Content-Type: application/json
+
+{
+  "name": "Daniel4",
+  "surname": "Dantas",
+  "email": "contatodanieldantasdev@gmail.com"
+}
+
+### DELETE request student
+DELETE {{host}}/students/4
+Content-Type: application/json

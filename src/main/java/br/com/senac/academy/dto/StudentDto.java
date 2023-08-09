@@ -7,20 +7,20 @@ public class StudentDto
 {
     @Getter
     @Setter
-    private Integer _id;
+    private Integer id;
     @Getter
     @Setter
-    private String _name;
+    private String name;
     @Getter
     @Setter
-    private String _surName;
-    private String _email;
+    private String surname;
+    private String email;
 
-    public String get_email() {
-        return _email;
+    public String getEmail() {
+        return email;
     }
 
-    public void set_email(String _email) {
-        this._email = _email;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
