@@ -4,6 +4,8 @@ import br.com.senac.academy.entity.Student;
 import br.com.senac.academy.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StudentService {
     private final StudentRepository _studentRepository;
@@ -16,6 +18,10 @@ public class StudentService {
         return _studentRepository.save(student);
     }
 
+    public List<Student> getAll() {
+        return _studentRepository.findAll();
+    }
+
     public Student getById(Integer id) {
         return _studentRepository.findById(id).orElse(null);
     }
@@ -23,9 +29,9 @@ public class StudentService {
     public Student update(Integer id, Student student) {
         Student _student = _studentRepository.findById(id).orElse(null);
         if (_student != null) {
-            _student.set_name(student.get_name());
-            _student.set_surName(student.get_surName());
-            _student.set_email(student.get_email());
+            _student.setName(student.getName());
+            _student.setSurname(student.getSurname());
+            _student.setEmail(student.getEmail());
             return _studentRepository.save(_student);
         } else {
             return null;
