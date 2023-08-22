@@ -9,7 +9,7 @@ Content-Type: application/json
 }
 
 ### GET request students
-GET {{host}}/students
+GET {{host}}/students?page=1&itemCount=2&ordination=name&typeOrdination=ASC
 Accept: application/json
 
 ### GET request student by id

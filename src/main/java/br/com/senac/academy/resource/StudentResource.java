@@ -4,6 +4,9 @@ import br.com.senac.academy.dto.StudentDto;
 import br.com.senac.academy.entity.Student;
 import br.com.senac.academy.service.StudentService;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,12 +35,12 @@ public class StudentResource {
     }
 
     @GetMapping
-    public ResponseEntity<List<StudentDto>> getAll() {
-        List<Student> students = _studentService.getAll();
-        List<StudentDto> studentsDto = students.stream()
-                .map(student -> _mapper.map(student, StudentDto.class))
-                .toList();
-        return new ResponseEntity<>(studentsDto, HttpStatus.OK);
+    public Page<Student> getAll(@RequestParam Integer page, @RequestParam Integer itemCount, @RequestParam String ordination, @RequestParam String typeOrdination) {
+        PageRequest pageRequest = PageRequest.of(page, itemCount, typeOrdination.equals("ASC")
+                ? Sort.by(ordination).ascending()
+                : Sort.by(ordination).descending());
+
+        return _studentService.getAll(pageRequest);
     }
 
     @GetMapping("/{id}")

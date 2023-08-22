@@ -2,6 +2,8 @@ package br.com.senac.academy.service;
 
 import br.com.senac.academy.entity.Student;
 import br.com.senac.academy.repository.StudentRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +20,8 @@ public class StudentService {
         return _studentRepository.save(student);
     }
 
-    public List<Student> getAll() {
-        return _studentRepository.findAll();
+    public Page<Student> getAll(PageRequest pageRequest) {
+        return _studentRepository.findAll(pageRequest);
     }
 
     public Student getById(Integer id) {
