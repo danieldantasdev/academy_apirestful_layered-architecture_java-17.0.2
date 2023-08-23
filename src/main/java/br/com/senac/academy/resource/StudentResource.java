@@ -1,8 +1,13 @@
 package br.com.senac.academy.resource;
 
+import br.com.senac.academy.common.ExampleValues;
 import br.com.senac.academy.dto.StudentDto;
 import br.com.senac.academy.entity.Student;
 import br.com.senac.academy.service.StudentService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,8 +15,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("api/students")
@@ -26,7 +29,7 @@ public class StudentResource {
     }
 
     @PostMapping
-    public ResponseEntity<StudentDto> create(@RequestBody StudentDto studentDto) {
+    public ResponseEntity<StudentDto> create(@RequestBody @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(examples = {@ExampleObject(name = "Example body student", value = ExampleValues.Student)})) StudentDto studentDto) {
         Student student = _mapper.map(studentDto, Student.class);
         student = _studentService.save(student);
 
@@ -44,7 +47,8 @@ public class StudentResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StudentDto> getById(@PathVariable Integer id) {
+    @Operation(description = "return object user by id")
+    public ResponseEntity<StudentDto> getById(@PathVariable @Schema(example = ExampleValues.idStudent) Integer id) {
         Student student = _studentService.getById(id);
         if (student != null) {
             StudentDto studentDto = _mapper.map(student, StudentDto.class);
